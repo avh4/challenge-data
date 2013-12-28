@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/challenge.iml" filepath="$PROJECT_DIR$/challenge.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../data-client-java/log.iml" filepath="$PROJECT_DIR$/../data-client-java/log.iml" />
     </modules>
   </component>
 </project>

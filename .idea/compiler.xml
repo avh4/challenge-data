@@ -23,10 +23,12 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="challenge" />
+        <module name="log" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="challenge" target="1.7" />
+      <module name="log" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
