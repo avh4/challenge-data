@@ -16,9 +16,15 @@ public class ViewModel {
     }
 
     public ViewModel(TransactionBuffer buffer) {
-        activeChallengesRepository = new BufferFollowerEngine<>(buffer, new ActiveChallengesRepository());
-        daysRepository = new BufferFollowerEngine<>(buffer, new DaysRepository());
-        newThing = new NewThing(activeChallengesRepository, daysRepository);
+        this(new BufferFollowerEngine<>(buffer, new ActiveChallengesRepository()),
+                new BufferFollowerEngine<>(buffer, new DaysRepository()));
+    }
+
+    public ViewModel(FollowerEngine<ActiveChallengesRepository> activeChallengesRepository,
+                     FollowerEngine<DaysRepository> daysRepository) {
+        this.activeChallengesRepository = activeChallengesRepository;
+        this.daysRepository = daysRepository;
+        newThing = new NewThing(this.activeChallengesRepository, this.daysRepository);
     }
 
     public List<String> activeChallenges() {

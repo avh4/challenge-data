@@ -1,13 +1,17 @@
 package net.avh4.scratch.challenge;
 
-import net.avh4.data.log.ServerTransactionLog;
-import net.avh4.data.log.TransactionBuffer;
+import net.avh4.data.log.*;
 
 public class Demo {
     public static void main(String[] args) {
         ServerTransactionLog server = new ServerTransactionLog("http://localhost:5000", "ChallengeData", "demo");
         TransactionBuffer buffer = new TransactionBuffer(server, server);
-        ViewModel model = new ViewModel(buffer);
+        PushEngine push = new PushEngine(buffer);
+        PushFollowerEngine<ActiveChallengesRepository> activeChallengesEngine = new PushFollowerEngine<>(new ActiveChallengesRepository());
+        PushFollowerEngine<DaysRepository> daysEngine = new PushFollowerEngine<>(new DaysRepository());
+        push.add(activeChallengesEngine, daysEngine);
+        push.sync();
+        ViewModel model = new ViewModel(activeChallengesEngine, daysEngine);
         Commands commands = new Commands(buffer);
 
         System.out.println("=== ACTIVE CHALLENGES ===");
